@@ -7,6 +7,11 @@ const app = express()
 const PORT = process.env.PORT
 console.log(PORT)
 
+// MIDDLEWARE
+app.set('views', __dirname + '/views')
+app.set('view engine', 'jsx')
+app.engine('jsx', require('express-react-views').createEngine())
+
 // ROUTES
 app.get('/', (req,res)=> {
     res.send('Welcome to an Awesome App about Breads!')
@@ -18,7 +23,7 @@ app.use('/breads', breadsController)
 
 //404
 app.get('*', (req, res)=> {
-    res.send('This page does not exist')
+    res.send('<h1>404 NOT FOUND</h1>')
 })
 
 // LISTEN
