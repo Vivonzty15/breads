@@ -16,7 +16,9 @@ function Index ({breads, title})  {
                         <a href= {`/breads/${index}`}>
                             {bread.name}
                         </a>
-                    </li>)
+                        <img src={bread.image} alt={bread.name} />
+                    </li>
+                    )
                 })
             }
         </ul>

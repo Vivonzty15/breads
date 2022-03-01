@@ -1,5 +1,6 @@
 // DEPENDENCIES
 const express = require('express')
+const methodOverride = require('method-override')
 
 // CONFIGURATION
 require('dotenv').config()
@@ -7,12 +8,13 @@ const app = express()
 const PORT = process.env.PORT
 console.log(PORT)
 
-// MIDDLEWARE
+// MIDDLEWARE / EXPRESS SETTINGS
 app.use(express.static('public'))
 app.set('views', __dirname + '/views')
 app.set('view engine', 'jsx')
 app.engine('jsx', require('express-react-views').createEngine())
 app.use(express.urlencoded({extended: true}))
+app.use(methodOverride('_method'))
 
 // ROUTES
 
