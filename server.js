@@ -1,12 +1,15 @@
 // DEPENDENCIES
 const express = require('express')
 const methodOverride = require('method-override')
+const mongoose = require('mongoose')
 
 // CONFIGURATION
 require('dotenv').config()
 const app = express()
 const PORT = process.env.PORT
-console.log(PORT)
+mongoose.connect(process.env.MONGO_URI, {useNewUrlParser: true, useUnifiedTopology: true}, () => {
+    console.log('connected to mongo: ', process.env.MONGO_URI)
+})
 
 // MIDDLEWARE / EXPRESS SETTINGS
 app.use(express.static('public'))
