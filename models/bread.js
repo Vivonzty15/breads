@@ -21,7 +21,7 @@ const breadSchema = new Schema({
 
 // helper methods 
 breadSchema.methods.getBakedBy = function () {
-  return `${this.name} was baked with love by ${this.baker}, and ${this.hasGluten ? 'does' : 'does NOT'} have gluten.`
+return `${this.name} was baked with love by <a href="/bakers/${this.baker.id}${this.baker.name}, who has been with us since ${this.baker.startDate.getFullYear()} and ${this.hasGluten ? 'does' : 'does NOT'} have gluten.`
 }
 
 // breadSchema.static.sameBaker = function (inputbaker) {

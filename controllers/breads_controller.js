@@ -5,12 +5,16 @@ const baker = require('../models/baker.js')
 
 // INDEX
 breads.get('/', (req, res) => {
-    db.Bread.find()
-        .then(foundBreads => {
-            res.render('index', {
-                breads: foundBreads,
-                title: 'Index Page'
-            })
+    baker.find()
+        .then(foundBakers => {
+            db.Bread.find()
+                .then(foundBreads => {
+                    res.render('index', {
+                        breads: foundBreads,
+                        bakers: foundBakers,
+                        title: 'Index Page'
+                    })
+                })
         })
 })
 
@@ -26,18 +30,24 @@ breads.get('/new', (req, res) => {
 
 // EDIT
 breads.get('/:id/edit', (req, res) => {
-    db.Bread.findById(req.params.id)
-        .then(foundBread => {
-            console.log(foundBread)
-            res.render('edit', {
-                bread: foundBread
-            })
+    baker.find()
+        .then(foundBakers => {
+            db.Bread.findById(req.params.id)
+                .then(foundBread => {
+                    console.log(foundBread)
+                    res.render('edit', {
+                        bread: foundBread,
+                        bakers: foundBakers
+                    })
+                })
         })
+
 })
 
 // SHOW 
 breads.get('/:id', (req, res) => {
     db.Bread.findById(req.params.id)
+        .populate('baker')
         .then(foundBread => {
             res.render('show', {
                 bread: foundBread,
